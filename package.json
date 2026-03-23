@@ -1,0 +1,16 @@
+{
+  "name": "koryopath-crm",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run dev:frontend & npm run dev:convex",
+    "dev:frontend": "cd frontend && vite",
+    "dev:convex": "npx convex dev",
+    "build": "cd frontend && tsc -b && vite build",
+    "deploy:convex": "npx convex deploy"
+  },
+  "devDependencies": {
+    "convex": "^1.17.0"
+  }
+}
