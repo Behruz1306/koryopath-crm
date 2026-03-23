@@ -25,6 +25,18 @@ import { StatCard, ProgressBar, StatusBadge } from '../components/ui';
 import { useDocumentTitle } from '../hooks';
 import type { ExchangeRates } from '../types';
 
+/** Safely format a date value — returns fallback on invalid input */
+function safeFormat(value: unknown, fmt: string, fallback = '—'): string {
+  try {
+    if (value == null) return fallback;
+    const d = new Date(value as number | string);
+    if (isNaN(d.getTime())) return fallback;
+    return format(d, fmt);
+  } catch {
+    return fallback;
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Animation helpers
 // ---------------------------------------------------------------------------
@@ -111,7 +123,7 @@ export default function DashboardPage() {
 
   const upcomingTasks = (myTasks ?? [])
     .filter((t) => t.dueDate)
-    .sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime())
+    .sort((a, b) => (Number(a.dueDate) || 0) - (Number(b.dueDate) || 0))
     .slice(0, 5);
 
   const myPenalties = (penaltiesData ?? []).filter((p) => p.agentId === user?.id);
@@ -168,7 +180,7 @@ export default function DashboardPage() {
           </p>
         </div>
         <p className="hidden text-sm text-gray-400 sm:block">
-          {format(new Date(), 'EEEE, d MMMM yyyy')}
+          {safeFormat(Date.now(), 'EEEE, d MMMM yyyy')}
         </p>
       </motion.div>
 
@@ -277,7 +289,7 @@ export default function DashboardPage() {
                     <RateRow label="UZS" value={exchangeRates.UZS} symbol="сум" />
                     <p className="mt-2 text-xs text-gray-400">
                       {t('dashboard.updatedAt', 'Updated')}{' '}
-                      {format(new Date(exchangeRates.updatedAt), 'HH:mm, d MMM')}
+                      {safeFormat(exchangeRates.updatedAt, 'HH:mm, d MMM')}
                     </p>
                   </div>
                 ) : (
@@ -311,7 +323,7 @@ export default function DashboardPage() {
                           {task.title}
                         </p>
                         <p className="text-xs text-gray-500">
-                          {t('dashboard.due', 'Due')}: {format(new Date(task.dueDate), 'd MMM yyyy')}
+                          {t('dashboard.due', 'Due')}: {safeFormat(task.dueDate, 'd MMM yyyy')}
                         </p>
                       </div>
                       <span className="ml-3 inline-flex items-center rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700">
@@ -375,7 +387,7 @@ export default function DashboardPage() {
                               <StatusBadge status={s.status} size="sm" />
                             </td>
                             <td className="py-2.5 text-right text-xs text-gray-400">
-                              {format(new Date(s.createdAt), 'd MMM')}
+                              {safeFormat(s.createdAt ?? s._creationTime, 'd MMM')}
                             </td>
                           </tr>
                         ))}
@@ -415,7 +427,7 @@ export default function DashboardPage() {
                         </p>
                         <p className="mt-0.5 flex items-center gap-1 text-xs text-gray-500">
                           <Clock className="h-3 w-3" />
-                          {format(new Date(task.dueDate), 'd MMM yyyy')}
+                          {safeFormat(task.dueDate, 'd MMM yyyy')}
                         </p>
                       </li>
                     ))}
@@ -606,7 +618,7 @@ export default function DashboardPage() {
                           {task.title}
                         </p>
                         <p className="text-xs text-gray-500">
-                          {t('dashboard.due', 'Due')}: {format(new Date(task.dueDate), 'd MMM yyyy')}
+                          {t('dashboard.due', 'Due')}: {safeFormat(task.dueDate, 'd MMM yyyy')}
                         </p>
                       </div>
                       <span className="ml-3 inline-flex items-center rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700">
@@ -645,7 +657,7 @@ export default function DashboardPage() {
                         </p>
                         <p className="mt-0.5 flex items-center gap-1 text-xs text-gray-500">
                           <Clock className="h-3 w-3" />
-                          {format(new Date(task.dueDate), 'd MMM yyyy')}
+                          {safeFormat(task.dueDate, 'd MMM yyyy')}
                         </p>
                       </li>
                     ))}
