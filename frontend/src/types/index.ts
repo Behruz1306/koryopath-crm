@@ -298,10 +298,13 @@ export interface Achievement {
 // --- Exchange rates ---
 
 export interface ExchangeRates {
-  USD: number;
-  KRW: number;
-  UZS: number;
-  updatedAt: string;
+  base: string;
+  lastUpdated: string | null;
+  rates: {
+    USD: number;
+    KRW: number | null;
+    UZS: number | null;
+  };
 }
 
 // --- API response wrappers ---

@@ -284,12 +284,12 @@ export default function DashboardPage() {
                   </div>
                 ) : exchangeRates ? (
                   <div className="space-y-3">
-                    <RateRow label="USD" value={exchangeRates.USD} symbol="$" />
-                    <RateRow label="KRW" value={exchangeRates.KRW} symbol="₩" />
-                    <RateRow label="UZS" value={exchangeRates.UZS} symbol="сум" />
+                    <RateRow label="USD" value={exchangeRates.rates?.USD ?? 1} symbol="$" />
+                    <RateRow label="KRW" value={exchangeRates.rates?.KRW ?? 0} symbol="₩" />
+                    <RateRow label="UZS" value={exchangeRates.rates?.UZS ?? 0} symbol="сум" />
                     <p className="mt-2 text-xs text-gray-400">
                       {t('dashboard.updatedAt', 'Updated')}{' '}
-                      {safeFormat(exchangeRates.updatedAt, 'HH:mm, d MMM')}
+                      {safeFormat(exchangeRates.lastUpdated, 'HH:mm, d MMM')}
                     </p>
                   </div>
                 ) : (
@@ -708,7 +708,7 @@ function RateRow({
     <div className="flex items-center justify-between rounded-lg bg-gray-50 px-3 py-2">
       <span className="text-sm font-medium text-gray-600">{label}</span>
       <span className="text-sm font-semibold text-gray-800">
-        {symbol} {value.toLocaleString()}
+        {symbol} {(value ?? 0).toLocaleString()}
       </span>
     </div>
   );
