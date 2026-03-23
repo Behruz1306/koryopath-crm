@@ -11,5 +11,5 @@ Thumbs.db
 *.swp
 *.swo
 
-# Convex generated files (regenerated on `npx convex dev`)
-convex/_generated/
+# Convex generated files are committed as stubs for Vercel build
+# They get overwritten locally by `npx convex dev`
