@@ -672,13 +672,16 @@ export const getStats = query({
     }
 
     // Count by status
-    const byStatus: Record<string, number> = {};
-    const byPriority: Record<string, number> = {};
+    const statusMap: Record<string, number> = {};
+    const priorityMap: Record<string, number> = {};
 
     for (const s of students) {
-      byStatus[s.status] = (byStatus[s.status] ?? 0) + 1;
-      byPriority[s.priority] = (byPriority[s.priority] ?? 0) + 1;
+      statusMap[s.status] = (statusMap[s.status] ?? 0) + 1;
+      priorityMap[s.priority] = (priorityMap[s.priority] ?? 0) + 1;
     }
+
+    const byStatus = Object.entries(statusMap).map(([status, count]) => ({ status, count }));
+    const byPriority = Object.entries(priorityMap).map(([priority, count]) => ({ priority, count }));
 
     return { byStatus, byPriority, total: students.length };
   },
