@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { Search, GraduationCap, Building2, X } from 'lucide-react';
 import { useDebounce } from '../../hooks';
 import { useQuery } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
+import { api } from '@convex/_generated/api';
 import { useAuthStore } from '../../store';
 import type { Student, University } from '../../types';
 

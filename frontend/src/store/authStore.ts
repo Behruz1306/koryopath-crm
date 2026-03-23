@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { ConvexHttpClient } from "convex/browser";
-import { api } from "../../convex/_generated/api";
+import { api } from '@convex/_generated/api';
 import toast from 'react-hot-toast';
 import type { User } from '../types';
 

@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { useQuery, useAction } from 'convex/react';
-import { api } from '../../convex/_generated/api';
+import { api } from '@convex/_generated/api';
 
 import { useAuthStore } from '../store';
 import { StatCard, ProgressBar, StatusBadge } from '../components/ui';

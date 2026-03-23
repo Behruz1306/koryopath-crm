@@ -17,7 +17,7 @@ import clsx from 'clsx';
 import toast from 'react-hot-toast';
 
 import { useQuery, useMutation } from "convex/react";
-import { api } from "../../convex/_generated/api";
+import { api } from '@convex/_generated/api';
 import { useStudentStore, useAuthStore } from '../store';
 import { useDebounce, useDocumentTitle } from '../hooks';
 import {

@@ -13,7 +13,7 @@ import {
   UserCircle,
 } from 'lucide-react';
 import { useQuery } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
+import { api } from '@convex/_generated/api';
 import { useAuthStore, useUIStore } from '../../store';
 import NotificationDropdown from './NotificationDropdown';
 import type { Language } from '../../types';

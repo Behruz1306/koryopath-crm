@@ -7,8 +7,8 @@ import { ru } from 'date-fns/locale';
 import { ko } from 'date-fns/locale';
 import { Info, AlertTriangle, AlertCircle, CheckCircle2, BellOff } from 'lucide-react';
 import { useQuery, useMutation } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
-import { Id } from '../../../convex/_generated/dataModel';
+import { api } from '@convex/_generated/api';
+import { Id } from '@convex/_generated/dataModel';
 import { useAuthStore } from '../../store';
 import type { NotificationPriority } from '../../types';
 
